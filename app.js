@@ -9,7 +9,11 @@ mongoose.connect('mongodb+srv://ljac:1q2w3e4r@cluster0.zez5f.mongodb.net/almacen
     marca:String,
     precio:Number
   });
-  const Ordenador = mongoose.model('Ordenadore',ordenadorSchema,'ordenadores' );
+  //const Ordenador = mongoose.model('Ordenadore',ordenadorSchema,'ordenadores' );
+
+//const modeloOrdenador = require('/models/ordenador');
+
+
   /*
   const buscaPrimero= ()=>{
     Ordenador.findOne()
@@ -53,7 +57,7 @@ const buscaPorId= (id)=>{
   })
   .catch(err=>console.error("Error al obtener el ordenador",err))
 }
-*/
+
 const buscarPrecioMayor=()=>{
   Ordenador.find({precio: {$gt:300}})
   .then( ordenadores =>{
@@ -68,3 +72,21 @@ const buscarPrecioMayor=()=>{
   .catch(err=>console.error("Error al obtener los ordenadores",err))
 }
 buscarPrecioMayor();
+*/
+
+
+const modeloOrdenador = require('./models/ordenador');
+
+
+
+
+
+
+const idBuscado = '6798f6fe4b062550114a2e0e';
+
+
+
+modeloOrdenador.creaNuevoOrdenador("IBM",2000);
+modeloOrdenador.buscaTodos();
+modeloOrdenador.actualizaPrecio(idBuscado,3000)
+
