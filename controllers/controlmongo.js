@@ -1,27 +1,33 @@
 // Using Node.js `require()`
 const mongoose = require('mongoose');
-
 // Using ES6 imports
+mongoose.connect('mongodb+srv://ljac:1q2w3e4r@cluster0.zez5f.mongodb.net/cochera')
+.then(() => console.log('¡Conectado!'));
 
-mongoose.connect('mongodb+srv://ljac:1q2w3e4r@cluster0.zez5f.mongodb.net/almacen')
-  .then(() => console.log('Connected!'));
-const ordenadorSchema = new mongoose.Schema({
-    marca:String,
-    precio:Number
+const cocheSchema = new mongoose.Schema({
+    marca: String,
+    modelo: String,
+    año: Number,
+    color: String
 });
 
-const Ordenador = mongoose.model('Ordenadore',ordenadorSchema, 'ordenadores');
+const Coche = mongoose.model('Coche', cocheSchema, 'coches');
 
-const buscaPrimero = ()=>{
-  //buscamos el primer registro
-Ordenador.findOne()
-  .then( ordenador=>{
-    if (ordenador) {
-      console.log('Primer ordenador encontrado',ordenador)
-    } else {
-      console.log('No se encontró ningún registro')
-    }
-  })
-  .catch(err=>console.error('Error al obtener el ordenador',err));
+const buscaPrimero = () => {
+    return Coche.findOne()
+        .then(coche => {
+            if (coche) {
+                console.log('Primer coche encontrado:', coche);
+                return coche;
+            } else {
+                console.log('No se encontró ningún registro');
+                return null;
+            }
+        })
+        .catch(err => {
+            console.error('Error al obtener el coche:', err);
+            throw err;
+        });
 }
+
 module.exports = { buscaPrimero };
